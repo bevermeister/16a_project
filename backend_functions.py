@@ -57,14 +57,15 @@ def get_results():
 
 #Returns an array of five letter words, from which the random word is chosen.
 def create_wordpick_array():
-    with open('five_letter_words.txt') as f:
+    with open('/Users/unothurfjell/Desktop/Skola/UC/Winter/16A/Random code/five_letter_words.txt') as f:
         lines = f.readlines()
+    lines = [x[:-1].lower() for x in lines]
     lines.append('vishy')
     return(lines)
 
-#Creates the array with all valid words
-def create_wordcheck_array():
-    with open('all_words.txt') as f:
+#Creates the array with all valid words. Adds the words in wordpick that isnt in wordcheck.
+def create_wordcheck_array(wordpick):
+    with open('/Users/unothurfjell/Desktop/Skola/UC/Winter/16A/Random code/all_words.txt') as f:
         lines = f.readlines()
     lines = [x[:-1].lower() for x in lines]
     final_lines = []
@@ -72,6 +73,9 @@ def create_wordcheck_array():
         if element.isalpha() and len(element) == 5:
             final_lines.append(element)
     final_lines.append('vishy')
+    for word in wordpick:
+        if word not in final_lines:
+            final_lines.append(word)
     return(final_lines)
 
 #Returns a random word from the wordpick_array. The random word will be 'vishy' with probability vishy_prob
