@@ -33,7 +33,6 @@ def check_word(proposed_word: str, real_word: str):
 
 #Changes the status of the keyboard keys according to the result from a check of a proposed word
 def change_key_status(buttons_dict: dict, proposed_word: str, result_check_word: list):
-    result_check_word.sort()
     for i in range(len(result_check_word)):
         buttons_dict[proposed_word[i]] = result_check_word[i]
 
