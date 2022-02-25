@@ -7,7 +7,7 @@ pygame.init()
 width = 600
 height = 800
 screen = pygame.display.set_mode([width, height])
-pygame.display.set_caption('Vordle')
+pygame.display.set_caption('VORDLE')
 
 # window colors
 black = (0,0,0)
@@ -35,6 +35,7 @@ game_font = pygame.font.Font('freesansbold.ttf', 15)
 title_font = pygame.font.Font('freesansbold.ttf', 40)
 title = title_font.render('V O R D L E', True, white, black)
 titleRect = title.get_rect()
+titleRect.center = (width // 2, height - 770)
 
 # draw game board boxes
 def draw_boxes():
@@ -84,7 +85,3 @@ while running:
 
     pygame.display.flip()
 pygame.quit()
-
- 
-
- 
