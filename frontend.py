@@ -12,6 +12,13 @@ height = 800
 screen = pygame.display.set_mode([width, height])
 pygame.display.set_caption('VORDLE')
 
+# background music
+pygame.mixer.init()
+L = ['fairytale.mp3', 'island.mp3', 'ittybitty.mp3', 'kawai.mp3', 'monkeys.mp3','sunshine.mp3', 'vacation.mp3', 'waltz.mp3', 'weasel.mp3']
+track = random.choice(L)
+pygame.mixer.music.load(track)
+mixer.music.play(-1)
+
 # window colors
 black = (0,0,0)
 white = (255,255,255)
