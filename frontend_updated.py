@@ -137,28 +137,36 @@ def stats():
     small_font = pygame.font.Font('freesansbold.ttf', 9)
     stats_played = small_font.render('Played', True, white, black)
     statsRect2 = stats_played.get_rect()
-    statsRect2.center = (width // 2 - 75, height - 195)
+    statsRect2.center = (width // 2 - 100, height - 195)
 
     # percentage of player's wins
     stats_wins = small_font.render('Win %', True, white, black)
     statsRect3 = stats_wins.get_rect()
-    statsRect3.center = (width // 2 - 26, height - 195)
+    statsRect3.center = (width // 2 - 50, height - 195)
 
     # current streak
     stats_current = small_font.render('Current', True, white, black)
     statsRect4 = stats_current.get_rect()
-    statsRect4.center = (width // 2 + 26, height - 195)
+    statsRect4.center = (width // 2, height - 195)
     stats_current2 = small_font.render('Streak', True, white, black)
     statsRect5 = stats_current2.get_rect()
-    statsRect5.center = (width // 2 + 26, height - 195)
+    statsRect5.center = (width // 2, height - 186)
 
     # max streak
     stats_max = small_font.render('Max', True, white, black)
     statsRect6 = stats_max.get_rect()
-    statsRect6.center = (width // 2 + 75, height - 195)
+    statsRect6.center = (width // 2 + 50, height - 195)
     stats_max2 = small_font.render('Streak', True, white, black)
     statsRect7 = stats_max2.get_rect()
-    statsRect7.center = (width // 2 + 75, height - 186)
+    statsRect7.center = (width // 2 + 50, height - 186)
+    
+    # best/fastest time
+    stats_time = small_font.render('Fastest', True, white, black)
+    statsRect8 = stats_time.get_rect()
+    statsRect8.center = (width // 2 + 100, height - 195)
+    stats_time2 = small_font.render('Time', True, white, black)
+    statsRect9 = stats_time2.get_rect()
+    statsRect9.center = (width // 2 + 100, height - 186)
 
     # histogram title
     hist_title = stats_font.render('GUESS DISTRIBUTION', True, white, black)
@@ -181,6 +189,8 @@ def stats():
         screen2.blit(stats_current2, statsRect5)
         screen2.blit(stats_max, statsRect6)
         screen2.blit(stats_max2, statsRect7)
+        screen2.blit(stats_time, statsRect8)
+        screen2.blit(stats_time2, statsRect9)
         screen2.blit(hist_title, statsRectHist)
 
         # if x is pressed (*hovered over lol I need to fix this), go back to game screen (however it might reset progress, we need to test this)
