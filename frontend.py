@@ -1,3 +1,4 @@
+from contextlib import redirect_stderr
 from turtle import TurtleScreen
 import pygame
 import button
@@ -15,6 +16,10 @@ pygame.display.set_caption('VORDLE')
 black = (0,0,0)
 white = (255,255,255)
 gray = (150,150,150)
+green = (60, 186, 84)
+yellow = (244, 194, 13)
+red = (219, 50, 54)
+blue = (72, 133, 237)
 
 # load button image
 stats_img = pygame.image.load('stats.png').convert_alpha()
@@ -39,9 +44,30 @@ timer = pygame.time.Clock()
 # initialize font, create title
 game_font = pygame.font.Font('freesansbold.ttf', 15)
 title_font = pygame.font.Font('freesansbold.ttf', 40)
-title = title_font.render('V O R D L E', True, white, black)
-titleRect = title.get_rect()
-titleRect.center = (width // 2, height - 770)
+
+title1 = title_font.render('V', True, blue)
+titleRect1 = title1.get_rect()
+titleRect1.center = ((width // 2 - 78), height - 770)
+
+title2 = title_font.render('O', True, red)
+titleRect2 = title2.get_rect()
+titleRect2.center = ((width // 2 - 48), height - 770)
+
+title3 = title_font.render('R', True, yellow)
+titleRect3 = title3.get_rect()
+titleRect3.center = ((width // 2 - 15), height - 770)
+
+title4 = title_font.render('D', True, blue)
+titleRect4 = title4.get_rect()
+titleRect4.center = ((width // 2 + 15), height - 770)
+
+title5 = title_font.render('L', True, green)
+titleRect5 = title5.get_rect()
+titleRect5.center = ((width // 2 + 43), height - 770)
+
+title6 = title_font.render('E', True, red)
+titleRect6 = title6.get_rect()
+titleRect6.center = ((width // 2 + 70), height - 770)
 
 # draw game board boxes
 def draw_boxes():
@@ -119,7 +145,12 @@ def game():
     while running:
         timer.tick(fps)
         screen.fill(black)
-        screen.blit(title, titleRect)
+        screen.blit(title1, titleRect1)
+        screen.blit(title2, titleRect2)
+        screen.blit(title3, titleRect3)
+        screen.blit(title4, titleRect4)
+        screen.blit(title5, titleRect5)
+        screen.blit(title6, titleRect6)
 
         # if stats button is pressed
         if stats_button.draw(screen):
