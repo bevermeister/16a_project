@@ -1,5 +1,5 @@
-from contextlib import redirect_stderr
-from turtle import TurtleScreen
+from contextlib import redirect_stderr # depending on finished product we might not need!
+from turtle import TurtleScreen # depending on finished product we might not need!
 import pygame
 import button
 
