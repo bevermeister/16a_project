@@ -111,30 +111,36 @@ def draw_keys3():
 
 # stats button loop
 def stats():
+    # set up the stats window
     width = 500
     height = 400
     screen2 = pygame.display.set_mode([width, height])
     pygame.display.set_caption('STATISTICS')
-
+    
+    # statistics heading
     stats_font = pygame.font.Font('freesansbold.ttf', 20)
     stats_title = stats_font.render('STATISTICS', True, white, black)
     titleRect2 = stats_title.get_rect()
     titleRect2.center = (width // 2, height - 330)
-
+    
+    # histogram title
     hist_title = stats_font.render('GUESS DISTRIBUTION', True, white, black)
     titleRect3 = hist_title.get_rect()
     titleRect3.center = (width // 2, height - 200)
-
+    
+    # load exit image (x)
     exit_img = pygame.image.load('exit.png').convert_alpha()
     exit_button = button.Button(470, 10, exit_img, 0.5)
 
     running = True
     while running:
+        # set up the stats screen background
         timer.tick(fps)
         screen.fill(black)
         screen2.blit(stats_title, titleRect2)
         screen2.blit(hist_title, titleRect3)
-
+        
+        # if x is pressed (*hovered over lol I need to fix this), go back to game screen (however it might reset progress, we need to test this)
         if exit_button.draw(screen2):
             game()
 
@@ -148,6 +154,13 @@ def stats():
 
 # game loop
 def game():
+    # redefine screen dimensions if user was to go to stats button (which resets the width/height dimensions)
+    width = 600
+    height = 800
+    screen = pygame.display.set_mode([width, height])
+    pygame.display.set_caption('VORDLE')
+    
+    # set up the game screen background
     running = True
     while running:
         timer.tick(fps)
