@@ -18,11 +18,11 @@ screen = pygame.display.set_mode([width, height])
 pygame.display.set_caption('VORDLE')
 
 # background music
-pygame.mixer.init()
-L = ['fairytale.mp3', 'island.mp3', 'ittybitty.mp3', 'kawai.mp3', 'monkeys.mp3','sunshine.mp3', 'vacation.mp3', 'waltz.mp3', 'weasel.mp3']
-track = random.choice(L)
-pygame.mixer.music.load(track)
-mixer.music.play(-1)
+#pygame.mixer.init()
+#L = ['fairytale.mp3', 'island.mp3', 'ittybitty.mp3', 'kawai.mp3', 'monkeys.mp3','sunshine.mp3', 'vacation.mp3', 'waltz.mp3', 'weasel.mp3']
+#track = random.choice(L)
+#pygame.mixer.music.load(track)
+#mixer.music.play(-1)
 
 # window colors
 black = (0,0,0)
@@ -122,6 +122,7 @@ def draw_keys3():
 
 # stats button 
 def stats():
+    print('Stats')
     width = 500
     height = 400
     screen2 = pygame.display.set_mode([width, height])
@@ -183,20 +184,24 @@ def stats():
         screen2.blit(stats_max2, statsRect7)
         screen2.blit(hist_title, statsRectHist)
 
-        # if x is pressed (*hovered over lol I need to fix this), go back to game screen (however it might reset progress, we need to test this)
-        if exit_button.draw(screen2):
-            game()
-
         # exit game loop
+        pressed = 0
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            elif event.type == pygame.MOUSEBUTTONUP:
+                pressed = 1
+
+        # if x is pressed (*hovered over lol I need to fix this), go back to game screen (however it might reset progress, we need to test this)
+        if exit_button.draw(screen2,pressed):
+            game()
 
         pygame.display.flip()
     pygame.quit()
 
 # settings button 
 def settings():
+    print('Settings')
     width = 500
     height = 400
     screen4 = pygame.display.set_mode([width, height])
@@ -244,20 +249,25 @@ def settings():
         screen4.blit(settings_feedback, settingsRect4)
         screen4.blit(settings_message, settingsRect5)
 
-        # if exit button is pressed
-        if exit_button.draw(screen4):
-            game()
-
         # exit game loop
+        pressed = 0
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            elif event.type == pygame.MOUSEBUTTONUP:
+                pressed = 1
+
+        # if exit button is pressed
+        if exit_button.draw(screen4, pressed):
+            game()
+
 
         pygame.display.flip()
     pygame.quit()
 
 # game loop
 def game():
+    print('Game')
     # redefine screen dimensions if user was to go to stats button (which resets the width/height dimensions)
     width = 450
     height = 600
@@ -276,12 +286,20 @@ def game():
         screen.blit(title5, titleRect5)
         screen.blit(title6, titleRect6)
 
+        # exit game loop
+        pressed = 0
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.MOUSEBUTTONUP:
+                pressed = 1
+
         # if stats button is pressed
-        if stats_button.draw(screen):
+        if stats_button.draw(screen, pressed):
             stats()
     
         # if settings button is pressed
-        if settings_button.draw(screen):
+        if settings_button.draw(screen, pressed):
             settings()
 
         # draw game board
@@ -290,10 +308,6 @@ def game():
         draw_keys2()
         draw_keys3()
 
-        # exit game loop
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
 
         pygame.display.flip()
     pygame.quit()
