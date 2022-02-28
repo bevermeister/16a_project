@@ -122,65 +122,57 @@ def draw_keys3():
 
 # stats button 
 def stats():
-    width = 375
-    height = 300
+    width = 500
+    height = 400
     screen2 = pygame.display.set_mode([width, height])
     pygame.display.set_caption('STATISTICS')
 
     # statistics title
-    stats_font = pygame.font.Font('freesansbold.ttf', 15)
-    stats_title = stats_font.render('STATISTICS', True, white, black)
+    stats_font = pygame.font.Font('freesansbold.ttf', 20)
+    stats_title = stats_font.render('STATISTICS', True, white, background)
     statsRect1 = stats_title.get_rect()
-    statsRect1.center = (width // 2, height - 255)
+    statsRect1.center = (width // 2, height - 340)
 
     # number of times player has played 
-    small_font = pygame.font.Font('freesansbold.ttf', 9)
-    stats_played = small_font.render('Played', True, white, black)
+    small_font = pygame.font.Font('freesansbold.ttf', 12)
+    stats_played = small_font.render('Played', True, white, background)
     statsRect2 = stats_played.get_rect()
-    statsRect2.center = (width // 2 - 100, height - 195)
+    statsRect2.center = (width // 2 - 100, height - 260)
 
     # percentage of player's wins
-    stats_wins = small_font.render('Win %', True, white, black)
+    stats_wins = small_font.render('Win %', True, white, background)
     statsRect3 = stats_wins.get_rect()
-    statsRect3.center = (width // 2 - 50, height - 195)
+    statsRect3.center = (width // 2 - 34, height - 260)
 
     # current streak
-    stats_current = small_font.render('Current', True, white, black)
+    stats_current = small_font.render('Current', True, white, background)
     statsRect4 = stats_current.get_rect()
-    statsRect4.center = (width // 2, height - 195)
-    stats_current2 = small_font.render('Streak', True, white, black)
+    statsRect4.center = (width // 2 + 34, height - 260)
+    stats_current2 = small_font.render('Streak', True, white, background)
     statsRect5 = stats_current2.get_rect()
-    statsRect5.center = (width // 2, height - 186)
+    statsRect5.center = (width // 2 + 34, height - 248)
 
     # max streak
-    stats_max = small_font.render('Max', True, white, black)
+    stats_max = small_font.render('Max', True, white, background)
     statsRect6 = stats_max.get_rect()
-    statsRect6.center = (width // 2 + 50, height - 195)
-    stats_max2 = small_font.render('Streak', True, white, black)
+    statsRect6.center = (width // 2 + 100, height - 260)
+    stats_max2 = small_font.render('Streak', True, white, background)
     statsRect7 = stats_max2.get_rect()
-    statsRect7.center = (width // 2 + 50, height - 186)
-    
-    # best/fastest time
-    stats_time = small_font.render('Fastest', True, white, black)
-    statsRect8 = stats_time.get_rect()
-    statsRect8.center = (width // 2 + 100, height - 195)
-    stats_time2 = small_font.render('Time', True, white, black)
-    statsRect9 = stats_time2.get_rect()
-    statsRect9.center = (width // 2 + 100, height - 186)
+    statsRect7.center = (width // 2 + 100, height - 248)
 
     # histogram title
-    hist_title = stats_font.render('GUESS DISTRIBUTION', True, white, black)
+    hist_title = stats_font.render('GUESS DISTRIBUTION', True, white, background)
     statsRectHist = hist_title.get_rect()
-    statsRectHist.center = (width // 2, height - 150)
+    statsRectHist.center = (width // 2, height - 200)
 
     # exit button
     exit_img = pygame.image.load('exit.png').convert_alpha()
-    exit_button = button.Button(353, 8, exit_img, 0.5)
+    exit_button = button.Button(470, 10, exit_img, 0.5)
 
     running = True
     while running:
         timer.tick(fps)
-        screen.fill(black)
+        screen.fill(background)
         # show text
         screen2.blit(stats_title, statsRect1)
         screen2.blit(stats_played, statsRect2)
@@ -189,8 +181,6 @@ def stats():
         screen2.blit(stats_current2, statsRect5)
         screen2.blit(stats_max, statsRect6)
         screen2.blit(stats_max2, statsRect7)
-        screen2.blit(stats_time, statsRect8)
-        screen2.blit(stats_time2, statsRect9)
         screen2.blit(hist_title, statsRectHist)
 
         # if x is pressed (*hovered over lol I need to fix this), go back to game screen (however it might reset progress, we need to test this)
@@ -207,42 +197,42 @@ def stats():
 
 # settings button 
 def settings():
-    width = 375
-    height = 300
+    width = 500
+    height = 400
     screen4 = pygame.display.set_mode([width, height])
     pygame.display.set_caption('SETTINGS')
 
     # settings title
-    settings_font = pygame.font.Font('freesansbold.ttf', 15)
-    settings_title = settings_font.render('SETTINGS', True, white, black)
+    settings_font = pygame.font.Font('freesansbold.ttf', 20)
+    settings_title = settings_font.render('SETTINGS', True, white, background)
     settingsRect1 = settings_title.get_rect()
-    settingsRect1.center = (width // 2, 30)
+    settingsRect1.center = (width // 2, height - 360)
 
     # change music volume, change song
-    small_font = pygame.font.Font('freesansbold.ttf', 12)
-    settings_music = small_font.render('Music', True, white, black)
+    small_font = pygame.font.Font('freesansbold.ttf', 16)
+    settings_music = small_font.render('Music', True, white, background)
     settingsRect2 = settings_music.get_rect()
-    settingsRect2.center = (150, 75)
+    settingsRect2.center = (width - 300, height - 300)
 
     # change colors from black to white (dark mode default)
-    settings_color = small_font.render('Dark Mode', True, white, black)
+    settings_color = small_font.render('Dark Mode', True, white, background)
     settingsRect3 = settings_color.get_rect()
-    settingsRect3.center = (150, 150)
+    settingsRect3.center = (width - 300, height - 200)
 
     # link to feedback form (https://forms.gle/5gXtiFWCRdHt44ac8)
-    settings_feedback = small_font.render('Feedback', True, white, black)
+    settings_feedback = small_font.render('Feedback', True, white, background)
     settingsRect4 = settings_feedback.get_rect()
-    settingsRect4.center = (150, 188)
+    settingsRect4.center = (width - 300, height - 150)
 
     # message to the inspiration that started all of this!
     tiny_font = pygame.font.Font('freesansbold.ttf', 9)
-    settings_message = tiny_font.render('We love you, Vishnu! <3 Aubrey, Annaka, & Uno', True, white, black)
+    settings_message = tiny_font.render('We love you, Vishnu! <3 Aubrey, Annaka, & Uno', True, white, background)
     settingsRect5 = settings_message.get_rect()
-    settingsRect5.center = (width // 2, 240)
+    settingsRect5.center = (width // 2, height - 80)
 
     # exit button
     exit_img = pygame.image.load('exit.png').convert_alpha()
-    exit_button = button.Button(353, 8, exit_img, 0.5)
+    exit_button = button.Button(470, 10, exit_img, 0.5)
 
     running = True
     while running:
