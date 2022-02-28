@@ -87,3 +87,13 @@ def pick_random_word(wordpick_array,vishy_prob):
 #Returns true if word is in the wordcheck array
 def is_valid(word, wordcheck_array):
     return (word in wordcheck_array)
+
+#Draws a small badge with the correct word
+def draw_badge_with_word(screen,correct_word,font_name,font_size,rectangle_width,rectangle_height,rectange_corner_coordinates,rect_color,text_color):
+    rect = pg.Rect(rectange_corner_coordinates,(rectangle_width,rectangle_height))
+    pg.draw.rect(screen,rect_color,rect)
+
+    font = pg.font.SysFont(font_name,font_size)
+    (text_width,text_height) = font.size(correct_word)
+    screen.blit(font.render(correct_word, True, text_color),(rectange_corner_coordinates[0]+rectangle_width/2-text_width/2,rectange_corner_coordinates[1]+rectangle_height/2-text_height/2))
+
