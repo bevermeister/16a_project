@@ -3,7 +3,8 @@ from turtle import TurtleScreen # depending on finished product we might not nee
 import pygame
 import button
 import random
-#import display_functions # this will store dark/light mode, music manipulation, etc.
+import webbrowser
+import display_functions # this will store dark/light mode, music manipulation, etc.
 from pygame import mixer
 from time import time
 
@@ -18,11 +19,11 @@ screen = pygame.display.set_mode([width, height])
 pygame.display.set_caption('VORDLE')
 
 # background music
-#pygame.mixer.init()
-#L = ['fairytale.mp3', 'island.mp3', 'ittybitty.mp3', 'kawai.mp3', 'monkeys.mp3','sunshine.mp3', 'vacation.mp3', 'waltz.mp3', 'weasel.mp3']
-#track = random.choice(L)
-#pygame.mixer.music.load(track)
-#mixer.music.play(-1)
+pygame.mixer.init()
+L = ['fairytale.mp3', 'island.mp3', 'ittybitty.mp3', 'kawai.mp3', 'monkeys.mp3','sunshine.mp3', 'vacation.mp3', 'waltz.mp3', 'weasel.mp3']
+track = random.choice(L)
+pygame.mixer.music.load(track)
+mixer.music.play(-1)
 
 # window colors
 black = (0,0,0)
@@ -62,6 +63,7 @@ timer = pygame.time.Clock()
 # initialize font, create title (Google themed because Uno got a job at Google!)
 game_font = pygame.font.Font('freesansbold.ttf', 15)
 title_font = pygame.font.Font('freesansbold.ttf', 30)
+tiny_font = pygame.font.Font('freesansbold.ttf', 12)
 
 title1 = title_font.render('V', True, blue)
 titleRect1 = title1.get_rect()
@@ -122,53 +124,60 @@ def draw_keys3():
 
 # stats button 
 def stats():
-    print('Stats')
-    width = 500
-    height = 400
+    width = 375
+    height = 300
     screen2 = pygame.display.set_mode([width, height])
     pygame.display.set_caption('STATISTICS')
 
     # statistics title
-    stats_font = pygame.font.Font('freesansbold.ttf', 20)
-    stats_title = stats_font.render('STATISTICS', True, white, background)
+    stats_font = pygame.font.Font('freesansbold.ttf', 15)
+    stats_title = stats_font.render('STATISTICS', True, white, black)
     statsRect1 = stats_title.get_rect()
-    statsRect1.center = (width // 2, height - 340)
+    statsRect1.center = (width // 2, height - 255)
 
     # number of times player has played 
-    small_font = pygame.font.Font('freesansbold.ttf', 12)
-    stats_played = small_font.render('Played', True, white, background)
+    small_font = pygame.font.Font('freesansbold.ttf', 9)
+    stats_played = small_font.render('Played', True, white, black)
     statsRect2 = stats_played.get_rect()
-    statsRect2.center = (width // 2 - 100, height - 260)
+    statsRect2.center = (width // 2 - 100, height - 195)
 
     # percentage of player's wins
-    stats_wins = small_font.render('Win %', True, white, background)
+    stats_wins = small_font.render('Win %', True, white, black)
     statsRect3 = stats_wins.get_rect()
-    statsRect3.center = (width // 2 - 34, height - 260)
+    statsRect3.center = (width // 2 - 50, height - 195)
 
     # current streak
-    stats_current = small_font.render('Current', True, white, background)
+    stats_current = small_font.render('Current', True, white, black)
     statsRect4 = stats_current.get_rect()
-    statsRect4.center = (width // 2 + 34, height - 260)
-    stats_current2 = small_font.render('Streak', True, white, background)
+    statsRect4.center = (width // 2, height - 195)
+    stats_current2 = small_font.render('Streak', True, white, black)
     statsRect5 = stats_current2.get_rect()
-    statsRect5.center = (width // 2 + 34, height - 248)
+    statsRect5.center = (width // 2, height - 186)
 
     # max streak
-    stats_max = small_font.render('Max', True, white, background)
+    stats_max = small_font.render('Max', True, white, black)
     statsRect6 = stats_max.get_rect()
-    statsRect6.center = (width // 2 + 100, height - 260)
-    stats_max2 = small_font.render('Streak', True, white, background)
+    statsRect6.center = (width // 2 + 50, height - 195)
+    stats_max2 = small_font.render('Streak', True, white, black)
     statsRect7 = stats_max2.get_rect()
-    statsRect7.center = (width // 2 + 100, height - 248)
+    statsRect7.center = (width // 2 + 50, height - 186)
+
+    # best/fastest time
+    stats_time = small_font.render('Fastest', True, white, black)
+    statsRect8 = stats_time.get_rect()
+    statsRect8.center = (width // 2 + 100, height - 195)
+    stats_time2 = small_font.render('Time', True, white, black)
+    statsRect9 = stats_time2.get_rect()
+    statsRect9.center = (width // 2 + 100, height - 186)
 
     # histogram title
-    hist_title = stats_font.render('GUESS DISTRIBUTION', True, white, background)
+    hist_title = stats_font.render('GUESS DISTRIBUTION', True, white, black)
     statsRectHist = hist_title.get_rect()
-    statsRectHist.center = (width // 2, height - 200)
+    statsRectHist.center = (width // 2, height - 150)
 
     # exit button
     exit_img = pygame.image.load('exit.png').convert_alpha()
-    exit_button = button.Button(470, 10, exit_img, 0.5)
+    exit_button = button.Button(353, 8, exit_img, 0.5)
 
     running = True
     while running:
@@ -182,6 +191,8 @@ def stats():
         screen2.blit(stats_current2, statsRect5)
         screen2.blit(stats_max, statsRect6)
         screen2.blit(stats_max2, statsRect7)
+        screen2.blit(stats_time, statsRect8)
+        screen2.blit(stats_time2, statsRect9)
         screen2.blit(hist_title, statsRectHist)
 
         # exit game loop
@@ -201,7 +212,6 @@ def stats():
 
 # settings button 
 def settings():
-    print('Settings')
     width = 500
     height = 400
     screen4 = pygame.display.set_mode([width, height])
@@ -211,29 +221,52 @@ def settings():
     settings_font = pygame.font.Font('freesansbold.ttf', 20)
     settings_title = settings_font.render('SETTINGS', True, white, background)
     settingsRect1 = settings_title.get_rect()
-    settingsRect1.center = (width // 2, height - 360)
+    settingsRect1.center = (width // 2, height - 340)
 
     # change music volume, change song
     small_font = pygame.font.Font('freesansbold.ttf', 16)
-    settings_music = small_font.render('Music', True, white, background)
+    settings_music = small_font.render('Sound', True, blue, background)
     settingsRect2 = settings_music.get_rect()
-    settingsRect2.center = (width - 300, height - 300)
+    settingsRect2.center = (width // 2, height - 300)
+
+    # music on button
+    music_on = tiny_font.render('Music On', True, white)
+    on_button = button.Button(width - 307, height - 270, music_on, 1.0)
+
+    # music off/mute button
+    music_off = tiny_font.render('Music Off', True, white)
+    off_button = button.Button(width - 222, height - 270, music_off, 1.0)
+
+    # skip song button
+    skip_song = tiny_font.render('Skip Song', True, white)
+    skip_button = button.Button(width - 137, height - 270, skip_song, 1.0)
 
     # change colors from black to white (dark mode default)
-    settings_color = small_font.render('Dark Mode', True, white, background)
+    settings_color = small_font.render('Display', True, red, background)
     settingsRect3 = settings_color.get_rect()
-    settingsRect3.center = (width - 300, height - 200)
+    settingsRect3.center = (width // 2, height - 220)
+
+    # dark mode button
+    dark_mode = tiny_font.render('Dark Mode', True, white)
+    dark_button = button.Button(width // 2 - 14, height - 190, dark_mode, 1.0)
+
+    # light mode button
+    light_mode = tiny_font.render('Light Mode', True, white)
+    light_button = button.Button(width // 2 + 71, height - 190, light_mode, 1.0)
 
     # link to feedback form (https://forms.gle/5gXtiFWCRdHt44ac8)
-    settings_feedback = small_font.render('Feedback', True, white, background)
+    settings_feedback = small_font.render('Feedback', True, title_green, background)
     settingsRect4 = settings_feedback.get_rect()
-    settingsRect4.center = (width - 300, height - 150)
+    settingsRect4.center = (width // 2, height - 145)
+
+    # feedback button
+    feedback = tiny_font.render('Click here to share your questions, comments, or concerns!', True, white)
+    feedback_button = button.Button(width // 2 + 175, height - 115, feedback, 1.0)
 
     # message to the inspiration that started all of this!
-    tiny_font = pygame.font.Font('freesansbold.ttf', 9)
-    settings_message = tiny_font.render('We love you, Vishnu! <3 Aubrey, Annaka, & Uno', True, white, background)
+    settings_message = tiny_font.render('We love you, Vishnu! <3 Aubrey, Annaka, & Uno', True, title_yellow, background)
     settingsRect5 = settings_message.get_rect()
-    settingsRect5.center = (width // 2, height - 80)
+    settingsRect5.center = (width // 2, height - 70)
 
     # exit button
     exit_img = pygame.image.load('exit.png').convert_alpha()
@@ -261,13 +294,29 @@ def settings():
         if exit_button.draw(screen4, pressed):
             game()
 
+        if on_button.draw(screen4, pressed):
+            pygame.mixer.music.unpause()
+
+        if off_button.draw(screen4, pressed):
+            pygame.mixer.music.pause()
+
+        if skip_button.draw(screen4, pressed):
+            display_functions.Display.change_song()
+        
+        if dark_button.draw(screen4, pressed):
+            display_functions.Display.dark_mode()
+        
+        if light_button.draw(screen4, pressed):
+            display_functions.Display.light_mode()
+        
+        if feedback_button.draw(screen4, pressed):
+            webbrowser.open(r"https://forms.gle/5gXtiFWCRdHt44ac8")
 
         pygame.display.flip()
     pygame.quit()
 
 # game loop
 def game():
-    print('Game')
     # redefine screen dimensions if user was to go to stats button (which resets the width/height dimensions)
     width = 450
     height = 600
@@ -307,7 +356,6 @@ def game():
         draw_keys1()
         draw_keys2()
         draw_keys3()
-
 
         pygame.display.flip()
     pygame.quit()
