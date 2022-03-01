@@ -6,8 +6,11 @@ import random
 import webbrowser
 from pygame import mixer
 from time import time
+import time
+import math
 
 class Display:
+
 
     # change the song
     def change_song():
@@ -20,6 +23,13 @@ class Display:
 
     # default
     def dark_mode(): 
+        #Pointer
+        pygame.mouse.set_visible(False)
+        pointerImg = pygame.image.load('vishy_pointerImg.png')
+        pointerImg = pygame.transform.scale(pointerImg, (25,35))
+        pointerImg_rect = pointerImg.get_rect()
+        pointerImg_rect.size = (25,35)
+
         # initialize pygame and fonts
         pygame.init()
         pygame.font.init()
@@ -127,6 +137,10 @@ class Display:
                 keys_text = game_font.render(keys3[col], True, white)
                 screen.blit(keys_text, (col * 30 + 128, 573))
 
+        #pointer
+        pointerImg_rect.topleft = pygame.mouse.get_pos()
+        screen.blit(pointerImg, pointerImg_rect)
+
         # stats button 
         def stats():
             width = 375
@@ -199,6 +213,10 @@ class Display:
                 screen2.blit(stats_time, statsRect8)
                 screen2.blit(stats_time2, statsRect9)
                 screen2.blit(hist_title, statsRectHist)
+
+                #pointer
+                pointerImg_rect.topleft = pygame.mouse.get_pos()
+                screen.blit(pointerImg, pointerImg_rect)
 
                 # exit game loop
                 pressed = 0
@@ -317,6 +335,10 @@ class Display:
                 if feedback_button.draw(screen4, pressed):
                     webbrowser.open(r"https://forms.gle/5gXtiFWCRdHt44ac8")
 
+                #pointer
+                pointerImg_rect.topleft = pygame.mouse.get_pos()
+                screen.blit(pointerImg, pointerImg_rect)
+
                 pygame.display.flip()
             pygame.quit()
 
@@ -327,6 +349,11 @@ class Display:
             height = 600
             screen = pygame.display.set_mode([width, height])
             pygame.display.set_caption('VORDLE')
+
+            #initializing start time and font
+            time_font = pygame.font.Font('freesansbold.ttf', 16)
+            timer.tick(fps)
+            start_time = pygame.time.get_ticks()
 
             running = True
             while running:
@@ -362,6 +389,19 @@ class Display:
                 draw_keys2()
                 draw_keys3()
 
+                #Time
+                seconds = math.floor(((pygame.time.get_ticks() - start_time)/1000)%60)
+                minutes = math.floor((pygame.time.get_ticks() - start_time)/60000)
+                game_time = time_font.render(str(minutes)+"m:"+str(seconds)+"s",True,white,black)
+                game_time_rect = game_time.get_rect()
+                game_time_rect.topleft = (15,15)
+                screen.blit(game_time,game_time_rect)
+
+
+                #pointer
+                pointerImg_rect.topleft = pygame.mouse.get_pos()
+                screen.blit(pointerImg, pointerImg_rect)
+
                 pygame.display.flip()
             pygame.quit()
         game()
@@ -370,6 +410,13 @@ class Display:
         # initialize pygame and fonts
         pygame.init()
         pygame.font.init()
+
+        #Pointer
+        pygame.mouse.set_visible(False)
+        pointerImg = pygame.image.load('vishy_pointerImg.png')
+        pointerImg = pygame.transform.scale(pointerImg, (25,35))
+        pointerImg_rect = pointerImg.get_rect()
+        pointerImg_rect.size = (25,35)
 
         # setting up the window
         width = 450
@@ -474,6 +521,10 @@ class Display:
                 keys_text = game_font.render(keys3[col], True, white)
                 screen.blit(keys_text, (col * 30 + 128, 573))
 
+        #pointer
+        pointerImg_rect.topleft = pygame.mouse.get_pos()
+        screen.blit(pointerImg, pointerImg_rect)
+
         # stats button 
         def stats():
             width = 375
@@ -558,6 +609,10 @@ class Display:
                 # if x is pressed (*hovered over lol I need to fix this), go back to game screen (however it might reset progress, we need to test this)
                 if exit_button.draw(screen2,pressed):
                     game()
+
+                #pointer
+                pointerImg_rect.topleft = pygame.mouse.get_pos()
+                screen.blit(pointerImg, pointerImg_rect)
 
                 pygame.display.flip()
             pygame.quit()
@@ -664,6 +719,10 @@ class Display:
                 if feedback_button.draw(screen4, pressed):
                     webbrowser.open(r"https://forms.gle/5gXtiFWCRdHt44ac8")
 
+                #pointer
+                pointerImg_rect.topleft = pygame.mouse.get_pos()
+                screen.blit(pointerImg, pointerImg_rect)
+
                 pygame.display.flip()
             pygame.quit()
 
@@ -674,6 +733,11 @@ class Display:
             height = 600
             screen = pygame.display.set_mode([width, height])
             pygame.display.set_caption('VORDLE')
+
+            #initializing start time and font
+            time_font = pygame.font.Font('freesansbold.ttf', 16)
+            timer.tick(fps)
+            start_time = pygame.time.get_ticks()
 
             running = True
             while running:
@@ -708,6 +772,19 @@ class Display:
                 draw_keys1()
                 draw_keys2()
                 draw_keys3()
+
+                #Time
+                seconds = math.floor(((pygame.time.get_ticks() - start_time)/1000)%60)
+                minutes = math.floor((pygame.time.get_ticks() - start_time)/60000)
+                game_time = time_font.render(str(minutes)+"m:"+str(seconds)+"s",True,white,black)
+                game_time_rect = game_time.get_rect()
+                game_time_rect.topleft = (15,15)
+                screen.blit(game_time,game_time_rect)
+
+
+                #pointer
+                pointerImg_rect.topleft = pygame.mouse.get_pos()
+                screen.blit(pointerImg, pointerImg_rect)
 
                 pygame.display.flip()
             pygame.quit()
