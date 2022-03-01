@@ -1,3 +1,4 @@
+from cgitb import small
 from contextlib import redirect_stderr # depending on finished product we might not need!
 from turtle import TurtleScreen # depending on finished product we might not need!
 import pygame
@@ -7,6 +8,7 @@ import webbrowser
 import display_functions # this will store dark/light mode, music manipulation, etc.
 from pygame import mixer
 from time import time
+import math
 
 # initialize pygame and fonts
 pygame.init()
@@ -17,13 +19,19 @@ width = 450
 height = 600
 screen = pygame.display.set_mode([width, height])
 pygame.display.set_caption('VORDLE')
+pygame.mouse.set_visible(False)
+pointerImg = pygame.image.load('vishy_pointerImg.png')
+pointerImg = pygame.transform.scale(pointerImg, (25,35))
+pointerImg_rect = pointerImg.get_rect()
+pointerImg_rect.size = (25,35)
+
 
 # background music
-pygame.mixer.init()
-L = ['fairytale.mp3', 'island.mp3', 'ittybitty.mp3', 'kawai.mp3', 'monkeys.mp3','sunshine.mp3', 'vacation.mp3', 'waltz.mp3', 'weasel.mp3']
-track = random.choice(L)
-pygame.mixer.music.load(track)
-mixer.music.play(-1)
+#pygame.mixer.init()
+#L = ['fairytale.mp3', 'island.mp3', 'ittybitty.mp3', 'kawai.mp3', 'monkeys.mp3','sunshine.mp3', 'vacation.mp3', 'waltz.mp3', 'weasel.mp3']
+#track = random.choice(L)
+#pygame.mixer.music.load(track)
+#mixer.music.play(-1)
 
 # window colors
 black = (0,0,0)
@@ -181,7 +189,6 @@ def stats():
 
     running = True
     while running:
-        timer.tick(fps)
         screen.fill(background)
         # show text
         screen2.blit(stats_title, statsRect1)
@@ -194,6 +201,11 @@ def stats():
         screen2.blit(stats_time, statsRect8)
         screen2.blit(stats_time2, statsRect9)
         screen2.blit(hist_title, statsRectHist)
+        
+
+        #pointer
+        pointerImg_rect.topleft = pygame.mouse.get_pos()
+        screen.blit(pointerImg, pointerImg_rect)
 
         # exit game loop
         pressed = 0
@@ -206,6 +218,7 @@ def stats():
         # if x is pressed (*hovered over lol I need to fix this), go back to game screen (however it might reset progress, we need to test this)
         if exit_button.draw(screen2,pressed):
             game()
+
 
         pygame.display.flip()
     pygame.quit()
@@ -312,6 +325,10 @@ def settings():
         if feedback_button.draw(screen4, pressed):
             webbrowser.open(r"https://forms.gle/5gXtiFWCRdHt44ac8")
 
+        #pointer
+        pointerImg_rect.topleft = pygame.mouse.get_pos()
+        screen.blit(pointerImg, pointerImg_rect)
+
         pygame.display.flip()
     pygame.quit()
 
@@ -323,9 +340,15 @@ def game():
     screen = pygame.display.set_mode([width, height])
     pygame.display.set_caption('VORDLE')
 
+    #initializing start time and font
+    time_font = pygame.font.Font('freesansbold.ttf', 16)
+    timer.tick(fps)
+    start_time = pygame.time.get_ticks()
+
     running = True
     while running:
         timer.tick(fps)
+
         screen.fill(background)
         # show text
         screen.blit(title1, titleRect1)
@@ -356,6 +379,18 @@ def game():
         draw_keys1()
         draw_keys2()
         draw_keys3()
+
+        #Time
+        seconds = math.floor(((pygame.time.get_ticks() - start_time)/1000)%60)
+        minutes = math.floor((pygame.time.get_ticks() - start_time)/60000)
+        game_time = time_font.render(str(minutes)+"m:"+str(seconds)+"s",True,white,black)
+        game_time_rect = game_time.get_rect()
+        game_time_rect.topleft = (15,15)
+        screen.blit(game_time,game_time_rect)
+
+        #pointer
+        pointerImg_rect.topleft = pygame.mouse.get_pos()
+        screen.blit(pointerImg, pointerImg_rect)
 
         pygame.display.flip()
     pygame.quit()
