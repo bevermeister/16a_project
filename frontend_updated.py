@@ -27,11 +27,11 @@ pointerImg_rect.size = (25,35)
 
 
 # background music
-#pygame.mixer.init()
-#L = ['fairytale.mp3', 'island.mp3', 'ittybitty.mp3', 'kawai.mp3', 'monkeys.mp3','sunshine.mp3', 'vacation.mp3', 'waltz.mp3', 'weasel.mp3']
-#track = random.choice(L)
-#pygame.mixer.music.load(track)
-#mixer.music.play(-1)
+pygame.mixer.init()
+L = ['fairytale.mp3', 'island.mp3', 'ittybitty.mp3', 'kawai.mp3', 'monkeys.mp3','sunshine.mp3', 'vacation.mp3', 'waltz.mp3', 'weasel.mp3']
+track = random.choice(L)
+pygame.mixer.music.load(track)
+mixer.music.play(-1)
 
 # window colors
 black = (0,0,0)
