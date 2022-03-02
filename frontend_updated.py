@@ -25,7 +25,6 @@ pointerImg = pygame.transform.scale(pointerImg, (25,35))
 pointerImg_rect = pointerImg.get_rect()
 pointerImg_rect.size = (25,35)
 
-
 # background music
 pygame.mixer.init()
 L = ['fairytale.mp3', 'island.mp3', 'ittybitty.mp3', 'kawai.mp3', 'monkeys.mp3','sunshine.mp3', 'vacation.mp3', 'waltz.mp3', 'weasel.mp3']
@@ -44,6 +43,18 @@ blue = (72,133,237)
 box_green =(106,172,100)
 box_yellow = (204, 180, 84)
 background = (18,18,19)
+
+# Vishnu confetti
+Vishies = []
+for q in range(100):
+    x = random.randrange(0, width)
+    y = random.randrange(0, height)
+    Vishies.append([x, y])
+
+vishnu_img = pygame.image.load("vishy.png")
+vishnu_img = pygame.transform.scale(vishnu_img, (25, 25))
+vishnu_confetti = vishnu_img.get_rect()
+vishnu_confetti.size = (10, 10)
 
 # load button images
 stats_img = pygame.image.load('stats.png').convert_alpha()
@@ -391,6 +402,20 @@ def game():
         #pointer
         pointerImg_rect.topleft = pygame.mouse.get_pos()
         screen.blit(pointerImg, pointerImg_rect)
+
+# put when you win game
+        for i in Vishies:
+            i[1] += 6
+            vishnu_confetti = vishnu_img.get_rect()
+            vishnu_confetti.center = i
+            vishnu_confetti.size = (25,25)
+            screen.blit(vishnu_img, vishnu_confetti)
+
+            if i[1] > 580:
+                i[1] = random.randrange(-50, -5)
+                i[0] = random.randrange(width)
+
+        timer.tick(600)
 
         pygame.display.flip()
     pygame.quit()
