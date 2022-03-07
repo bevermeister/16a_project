@@ -10,10 +10,15 @@ import time
 import math
 
 class Display:
-
+"""
+Display class containing all of the display functions.
+"""
 
     # change the song
     def change_song():
+    """
+    Change the song by randomly selecting from the list of tracks.
+    """
         # randomly select a new track
         pygame.mixer.init()
         L = ['fairytale.mp3', 'island.mp3', 'ittybitty.mp3', 'kawai.mp3', 'monkeys.mp3','sunshine.mp3', 'vacation.mp3', 'waltz.mp3', 'weasel.mp3']
@@ -22,7 +27,10 @@ class Display:
         mixer.music.play(-1)
 
     # default
-    def dark_mode(): 
+    def dark_mode():
+    """
+    Change display to dark mode by changing the black, white, and background RGBs (default setting).
+    """
         #Pointer
         pygame.mouse.set_visible(False)
         pointerImg = pygame.image.load('vishy_pointerImg.png')
@@ -407,6 +415,9 @@ class Display:
         game()
 
     def light_mode():
+    """
+    Change display to light mode by changing the black, white, and background RGBs.
+    """
         # initialize pygame and fonts
         pygame.init()
         pygame.font.init()
