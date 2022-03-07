@@ -130,8 +130,11 @@ title6 = title_font.render('E', True, red)
 titleRect6 = title6.get_rect()
 titleRect6.center = (278, 23)
 
-# games functions
+# game functions
 def draw_boxes():
+    '''
+    Draws the box grid to the screen.
+    '''
     global turn 
     global boxes
     for col in range(0,5):
@@ -139,12 +142,19 @@ def draw_boxes():
             pygame.draw.rect(screen, white, [col * 75 + 49, row * 75 + 45, 53, 53], 2)
 
 def draw_boxes_row(line):
+    '''
+    Draws a single row of boxes to the screen.
+    Args: line: a list of the form range(line to draw, line to draw + 1)
+    Returns: None
+    '''
     for col in range(0,5):
         for row in line:
             pygame.draw.rect(screen, white, [col * 75 + 49, row * 75 + 45, 53, 53], 2)
 
-# draw keyboard line by line
 def draw_keys1():
+    '''
+    Draw the first line of the keyboard to the screen.
+    '''
     global turn 
     global keys1
     for col in range(0,10):
@@ -153,6 +163,9 @@ def draw_keys1():
         screen.blit(keys_text, (col * 30 + 83, 497))
 
 def draw_keys2():
+    '''
+    Draw the second line of the keyboard to the screen.
+    '''
     global turn 
     global keys2
     for col in range(0,9):
@@ -161,6 +174,9 @@ def draw_keys2():
         screen.blit(keys_text, (col * 30 + 99, 533))
 
 def draw_keys3():
+    '''
+    Draw the third line of the keyboard to the screen.
+    '''
     global turn 
     global keys3
     for col in range(0,7):
@@ -170,11 +186,20 @@ def draw_keys3():
 
 def change_box_color(color, box):
     '''
-    args: box: a tuple, index location of the box to be changed
+    Change the color of a single box on the screen
+    Args: color: a tuple
+          box: a tuple, index location of the box to be changed
+    Returns: None
     '''
     pygame.draw.rect(screen, color, [box[1]*75 + 49, box[0] * 75 + 45, 53, 53])
 
 def change_key_color(color, letter):
+    '''
+    Changes the color of a single key on the keyboard.
+    Args: color: a tuple
+          letter: a string, the letter on the key to be changed
+    Returns: None
+    '''
     if letter in keys1:
         for i in range(len(keys1)):
             if letter == keys1[i]:
@@ -197,12 +222,26 @@ def change_key_color(color, letter):
                 screen.blit(keys_text, (i * 30 + 128, 573))
 
 def print_guess(guess, turn):
+    '''
+    Display the user's guess on the screen in the correct row.
+    Args: guess: a string
+          turn: an int. Determines which row to print the guess to
+    Returns: None
+    '''
     for i, letter in enumerate(guess):
         text_surface = guess_font.render(letter.upper(), True, white)
         screen.blit(text_surface,(i*75 + 63, turn*75 + 55, 53, 53))
         pygame.display.flip()
 
 def show_result(result, turn, guess):
+    '''
+    Change the box and key colors to the correct color when the user submits their guess.
+    Re-print guess after colors are changed.
+    Args: result: a list. Determines the color to change to.
+          turn: an int. Determines the row.
+          guess: a string. Determines which keyboard letter to change the color of.
+    Returns: None
+    '''
     for i in range(len(result)):
         if result[i] == 0:
             change_box_color(dark_gray, (turn, i))
@@ -219,6 +258,9 @@ def show_result(result, turn, guess):
     print_guess(guess, turn)
 
 def screen_fill():
+    '''
+    Initializes the screen with background, game board, keyboard, and previous guesses/results.
+    '''
     global guess_list
     global result_list
 
@@ -246,6 +288,9 @@ def screen_fill():
 
 # stats button 
 def stats():
+    '''
+    Initializes the stats screen when the stats button is pressed.
+    '''
 
     # initiate screen
     width = 375
@@ -415,6 +460,9 @@ def stats():
 
 # settings button 
 def settings():
+    '''
+    Initializes the settings screen when the settings button is pressed.
+    '''
     width = 500
     height = 400
     screen4 = pygame.display.set_mode([width, height])
@@ -526,6 +574,9 @@ def settings():
 
 # game loop
 def game():
+    '''
+    Main game function. Called at the end of the file and when the user exits the stats or settings screen.
+    '''
     global guess
     global turn
     global result
