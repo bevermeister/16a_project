@@ -39,9 +39,8 @@ result = []
 word_list = create_wordpick_array()
 all_words = create_wordcheck_array(word_list)
 
-# pick word from list
+# pick word from list (0.2 probability of being 'vishy')
 word = pick_random_word(word_list, 0.2)
-print(word)
 
 # background music
 pygame.mixer.init()
