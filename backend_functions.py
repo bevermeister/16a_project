@@ -212,7 +212,7 @@ Returns:
     lines (list): A list of words from where to pick the random word
 """
 def create_wordpick_array():
-    with open('/Users/unothurfjell/Desktop/Skola/UC/Winter/16A/Random code/five_letter_words.txt') as f:
+    with open('five_letter_words.txt') as f:
         lines = f.readlines()
     lines = [x[:-1].lower() for x in lines]
     lines.append('vishy')
@@ -225,7 +225,7 @@ Returns:
     lines (list): A list of words from where to check if the word is valid
 """
 def create_wordcheck_array(wordpick):
-    with open('/Users/unothurfjell/Desktop/Skola/UC/Winter/16A/Random code/all_words.txt') as f:
+    with open('all_words.txt') as f:
         lines = f.readlines()
     lines = [x[:-1].lower() for x in lines]
     final_lines = []
