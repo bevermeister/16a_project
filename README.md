@@ -2,6 +2,10 @@
 16A Final Project - VORDLE
 Group Members: Aubrey Gilman, Annaka Schone, and Uno Thurfjell
 
+VORDLE is our own version of the popular online game Wordle, except renamed to ‘VORDLE” to pay homage to our TA, Vishnu! The basic concept of the game is that there is a random five-letter word in the system, and you have six tries to figure out the correct word. Similar concept to Mastermind, with every guess you make, the game will tell you if each letter is correct and in the right spot, correct and in the wrong spot, or incorrect and not in the word, allowing the player to deduce what the word might be. It includes extra features in contrast to the original game, including background music, a timer, and other fun add-ons!
+
+For this project, we installed the Pygame package in order to develop the game.
+
 Requirements:
 Project name.
 Names of group members (if you don’t want to for privacy, add usernames).
