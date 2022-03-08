@@ -15,9 +15,10 @@ Returns:
 """
 def check_word(proposed_word: str, real_word: str):
     #If incorrect length
-    if len(proposed_word) != len(real_word):
-        print("Word should be", len(real_word), "characters long, not",len(proposed_word),"characters long.")
-        return
+    if len(proposed_word) < len(real_word):
+        raise ValueError('The word is too short, must be ' + str(len(real_word)) + ' characters.')
+    elif len(proposed_word) > len(real_word):
+        raise ValueError('The word is too long, must be ' + str(len(real_word)) + ' characters.')
     
     #Creating lists
     proposed_word = list(proposed_word.lower())
@@ -60,10 +61,12 @@ Args:
     proposed_word (str): the word that the player guessed
 """
 def save_results(score: int, time: int):
-    with open('results.txt','a') as f:
-        f.write(str(score)+" "+str(time)+"\n")
-    print('Saved')
-    f.close()
+    try:
+        with open('results.txt','a') as f:
+            f.write(str(score)+" "+str(time)+"\n")
+        f.close()
+    except OSError:
+        raise OSError('Could not open/load file. Make sure that the file is in your directory.')
 
 """
 Returns a dictionary with the distribution of the results
