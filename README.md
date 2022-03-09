@@ -34,27 +34,28 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE S
 
 
 References and Acknowledgement: 
-Pygame documentation - https://web.archive.org/web/20220223214213/https://www.pygame.org/docs/
-NYT Wordle - https://www.nytimes.com/games/wordle/index.html
+- Pygame documentation - https://web.archive.org/web/20220223214213/https://www.pygame.org/docs/
+- NYT Wordle - https://www.nytimes.com/games/wordle/index.html
 
 Dataset Background and Source:
+- five-letter English words - https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt
 
 
 Tutorials Used:
-Game board tutorial - https://www.youtube.com/watch?v=D8mqgW0DiKk&t=1029s
+- Game board tutorial - https://www.youtube.com/watch?v=D8mqgW0DiKk&t=1029s
   - used to set up the game board boxes and initial formatting for game loop on the main screen
   - added our own keyboard
   - added buttons to the main screen
   - added timer to main screen
 
-Button tutorial - https://www.youtube.com/watch?v=8SzTzvrWaAA&t=1689s
+- Button tutorial - https://www.youtube.com/watch?v=8SzTzvrWaAA&t=1689s
   - used to set up all of the buttons on the main, settings, and stats screens 
   - made multiple buttons with images
   - edited the press down commands for the cursor
   - edited the button class and manipulated it to work for our current project
 
 
-Snow tutorial - https://www.youtube.com/watch?v=tj01ESA4peo
+- Snow tutorial - https://www.youtube.com/watch?v=tj01ESA4peo
   - used to make the confetti when you win
   - uploaded an image to the confetti
   - manipulated the fps/speed of the confetti
