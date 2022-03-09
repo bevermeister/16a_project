@@ -1,7 +1,4 @@
-from asyncio import format_helpers
 from cgitb import small
-from contextlib import redirect_stderr # depending on finished product we might not need!
-from turtle import TurtleScreen # depending on finished product we might not need!
 import pygame
 import button
 import random
@@ -11,7 +8,7 @@ from pygame import mixer
 from time import time
 import math
 from backend_functions import *
-
+from checkDouble import *
 
 # initialize pygame and fonts
 pygame.init()
@@ -39,8 +36,9 @@ result = []
 word_list = create_wordpick_array()
 all_words = create_wordcheck_array(word_list)
 
-# pick word from list (0.2 probability of being 'vishy')
+# pick word from list
 word = pick_random_word(word_list, 0.2)
+print(word)
 
 # background music
 pygame.mixer.init()
@@ -129,7 +127,7 @@ title6 = title_font.render('E', True, red)
 titleRect6 = title6.get_rect()
 titleRect6.center = (278, 23)
 
-# game functions
+# games functions
 def draw_boxes():
     '''
     Draws the box grid to the screen.
@@ -150,6 +148,7 @@ def draw_boxes_row(line):
         for row in line:
             pygame.draw.rect(screen, white, [col * 75 + 49, row * 75 + 45, 53, 53], 2)
 
+# draw keyboard line by line
 def draw_keys1():
     '''
     Draw the first line of the keyboard to the screen.
@@ -436,9 +435,7 @@ def stats():
         pygame.display.flip()
 
         #pointer
-        pygame.mouse.set_visible(False)
-        pointerImg_rect.topleft = pygame.mouse.get_pos()
-        screen.blit(pointerImg, pointerImg_rect)
+        pygame.mouse.set_visible(True)
 
         # exit game loop
         pressed = 0
@@ -497,8 +494,8 @@ def settings():
     settingsRect3.center = (width // 2, height - 220)
 
     # dark mode button
-    dark_mode = tiny_font.render('Dark Mode', True, white)
-    dark_button = button.Button(width // 2 - 14, height - 190, dark_mode, 1.0)
+    dark_font = tiny_font.render('Dark Mode', True, white)
+    dark_button = button.Button(width // 2 - 14, height - 190, dark_font, 1.0)
 
     # light mode button
     light_mode = tiny_font.render('Light Mode', True, white)
@@ -625,7 +622,7 @@ def game():
 
                 # add to guess
                 if event.key != pygame.K_BACKSPACE and event.key != pygame.K_RETURN:
-                    if len(guess) < 5:
+                    if len(guess) < 5:          
                         guess += event.unicode
                
                 # backspace
@@ -657,30 +654,13 @@ def game():
                 print_guess(guess, turn)
 
                 # check for double letters, change result list so key is changed to highest result value color
-                count = {} # how many times a letter appears
-                repeated = 0 # signals whether any letters are repeated
+                check = checkDouble(guess, result)
 
-                for i in guess:
-                    if i in count:
-                        count[i] += 1
-                    else:
-                        count[i] = 1
-
-                for i in count:
-                    if count[i] > 1:
-                        repeated = i
-
-                res_list = [] # result of each repeated letter
-
-                if repeated != 0:
-                    for j in range(len(guess)):
-                        if guess[j] == repeated:
-                            res_list.append(result[j])
-
-                if len(res_list) > 0: # change the result of repeated letters to the highest value
-                    for i in range(len(result)):
-                        if guess[i] == repeated:
-                            result[i] = max(res_list)
+                check.get_count_dict()
+                check.get_repeated()
+                check.update_res_list()
+                check.update_result()
+                result = check.result
 
                 # change key colors after updating result list
                 for i in range(len(result)):
