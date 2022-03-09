@@ -1,5 +1,3 @@
-#from contextlib import redirect_stderr
-#from turtle import TurtleScreen
 import pygame
 import button
 import random
