@@ -268,8 +268,7 @@ Draws a small badge with the correct word
 Args:
     screen (pygame screen): The screen to blit the badge onto
     correct_word (str): The correct word to show on the badge
-    font_name (str): Name of font to be used
-    font_size (int): Size of font
+    font (pygame.font.Font): The font to be used
     rectangle_width (int): The width of the badge
     rectangle_height (int): The height of the rectangle
     rectangle_corner_coordinates (tuple): the coordinates of the upper left corner of the triangle
