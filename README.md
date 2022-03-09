@@ -41,6 +41,7 @@ References and Acknowledgement:
 
 Dataset Background and Source:
 - five-letter English words - https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt
+- all English words - https://github.com/dwyl/english-words/blob/master/words.txt
 
 
 Tutorials Used:
