@@ -38,7 +38,6 @@ all_words = create_wordcheck_array(word_list)
 
 # pick word from list
 word = pick_random_word(word_list, 0.2)
-print(word)
 
 # background music
 pygame.mixer.init()
